@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="jquery.uploader.css">
+</head>
+<body>
+	<h1>Simple XHR Uploader Examples</h1>
+
+	<h2>Default progress bar</h2>
+	<input type="file"
+		class="upload"
+		name="file"
+		multiple
+		data-url="../server-examples/php/upload.php" />
+
+	<h2>Custom listeners</h2>
+	<button
+		data-url="../server-examples/php/upload.php"
+		data-accept=".jpg,.gif"
+		data-name="file"
+		data-multiple="true">Select file</button>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="jquery.uploader.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		var example2;
+
+		// Example 1:
+		// Default progress console
+		$('.upload').uploader();
+
+		// Example 2:
+		// Custom listenelers
+		$('button').uploader({
+			defaultProgressBar: false,
+			accept: ['jpg', 'png', 'gif'], // This will overwrite data- attributes
+			data: {                        // Additional request body
+				folder: 'images',
+				validate: ['jpg', 'png', 'gif']
+			},
+			// Listeners
+			start: function() {
+				if ( ! example2 ) {
+					example2 = $('<span />').insertAfter(this.el);
+				}
+			},
+			progress: function(loaded, total) {
+				console.log(Math.round(loaded * 100 / total));
+				example2.text(' ' + Math.round(loaded * 100 / total) + '%' );
+			},
+			complete: function() {
+				example2.text( ' Completed 100%' );
+			},
+			// For each request
+			xhr: {
+				before: function() { console.log('xhr.before'); },
+				start: function() { console.log('xhr.start'); },
+				progress: function() { console.log('xhr.progress'); },
+				success: function() { console.log('xhr.success'); },
+				error: function() { console.log('xhr.error'); },
+				complete: function() { console.log('xhr.complete'); }
+			}
+		});
+
+	});
+	</script>
+</body>
+</html>
