@@ -1,3 +1,10 @@
+/*!
+ * simple-xhr-uploader v0.1.0
+ * https://github.com/cihadtekin/simple-xhr-uploader
+ * 
+ * Copyright 2016 Cihad Tekin <cihadtekin@gmail.com>
+ * Licensed under MIT
+ */
 ;(function(window, $){
   'use strict';
 
