@@ -31,14 +31,14 @@
 		var example2;
 
 		// Example 1:
-		// Default progress console
+		// Default progress bar
 		$('.upload').uploader();
 
 		// Example 2:
-		// Custom listenelers
+		// Custom listeners
 		$('button').uploader({
 			defaultProgressBar: false,
-			accept: ['jpg', 'png', 'gif'], // This will overwrite data- attributes
+			accept: ['jpg', 'png', 'gif'], // This will overwrite data-accept attribute
 			data: {                        // Additional request body
 				folder: 'images',
 				validate: ['jpg', 'png', 'gif']
@@ -51,10 +51,10 @@
 			},
 			progress: function(loaded, total) {
 				console.log(Math.round(loaded * 100 / total));
-				example2.text(' ' + Math.round(loaded * 100 / total) + '%' );
+				example2.text(' ' + Math.round(loaded * 100 / total) + '%');
 			},
 			complete: function() {
-				example2.text( ' Completed 100%' );
+				example2.text(' Completed 100%');
 			},
 			// For each request
 			xhr: {
@@ -62,11 +62,13 @@
 				start: function() { console.log('xhr.start'); },
 				progress: function() { console.log('xhr.progress'); },
 				success: function() { console.log('xhr.success'); },
-				error: function() { console.log('xhr.error'); },
-				complete: function() { console.log('xhr.complete'); }
+				complete: function() { console.log('xhr.complete'); },
+				error: function(response) {
+					console.log('xhr.error');
+					response.error && example2.text('Error: ' + response.message);
+				}
 			}
 		});
-
 	});
 	</script>
 </body>
