@@ -1,75 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>jQuery Simple XHR Uploader</title>
-	<meta charset="utf-8">
-	<meta name="description" content="Examples for the jQuery Simple XHR Uploader plugin" />
-	<link rel="stylesheet" type="text/css" href="dist/simple-xhr-uploader.min.css">
+  <title>jQuery Simple XHR Uploader</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Examples for the jQuery Simple XHR Uploader plugin" />
+  <link rel="stylesheet" type="text/css" href="dist/simple-xhr-uploader.min.css">
 </head>
 <body>
-	<h1>Examples</h1>
+  <h1>Examples</h1>
 
-	<h2>1- Default progress bar</h2>
-	<input type="file"
-		class="upload"
-		name="file"
-		multiple
-		data-url="upload.php" />
+  <h2>1- Default progress bar</h2>
+  <input type="file"
+    class="upload"
+    name="file"
+    multiple
+    data-url="upload.php" />
 
-	<h2>2- Custom listeners</h2>
-	<button
-		data-url="upload.php"
-		data-accept=".jpg,.gif"
-		data-name="file"
-		data-multiple="true">Select file</button>
+  <h2>2- Custom listeners</h2>
+  <button
+    data-url="upload.php"
+    data-accept=".jpg,.gif"
+    data-name="file"
+    data-multiple="true">Select file</button>
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script type="text/javascript" src="dist/simple-xhr-uploader.min.js"></script>
+  <p><a href="https://github.com/cihadtekin/simple-xhr-uploader" target="_blank">Source on Github</a></p>
 
-	<script type="text/javascript">
-	$(function() {
-		var example2;
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script type="text/javascript" src="dist/simple-xhr-uploader.min.js"></script>
 
-		// Example 1:
-		// Default progress bar
-		$('.upload').uploader();
+  <script type="text/javascript">
+  $(function() {
+    var example2;
 
-		// Example 2:
-		// Custom listeners
-		$('button').uploader({
-			defaultProgressBar: false,
-			accept: ['jpg', 'png', 'gif'], // This will overwrite data-accept attribute
-			data: {                        // Additional request body
-				folder: 'images',
-				validate: ['jpg', 'png', 'gif']
-			},
-			// Listeners
-			start: function() {
-				if ( ! example2 ) {
-					example2 = $('<span />').insertAfter(this.el);
-				}
-			},
-			progress: function(loaded, total) {
-				console.log(Math.round(loaded * 100 / total));
-				example2.text(' ' + Math.round(loaded * 100 / total) + '%');
-			},
-			complete: function() {
-				example2.text(' Completed 100%');
-			},
-			// For each request
-			xhr: {
-				before: function() { console.log('xhr.before'); },
-				start: function() { console.log('xhr.start'); },
-				progress: function() { console.log('xhr.progress'); },
-				success: function() { console.log('xhr.success'); },
-				complete: function() { console.log('xhr.complete'); },
-				error: function(response) {
-					console.log('xhr.error');
-					response.error && example2.text('Error: ' + response.message);
-				}
-			}
-		});
-	});
-	</script>
+    // Example 1:
+    // Default progress bar
+    $('.upload').uploader();
+
+    // Example 2:
+    // Custom listeners
+    $('button').uploader({
+      defaultProgressBar: false,
+      accept: ['jpg', 'png', 'gif'], // This will overwrite data-accept attribute
+      data: {                        // Additional request body
+        folder: 'images',
+        validate: ['jpg', 'png', 'gif']
+      },
+      // Listeners
+      start: function() {
+        this.el.next('span').remove();
+        example2 = $('<span />').insertAfter(this.el);
+      },
+      progress: function(loaded, total) {
+        console.log(Math.round(loaded * 100 / total));
+        example2.text(' ' + Math.round(loaded * 100 / total) + '%');
+      },
+      complete: function() {
+        example2.text(' Completed 100%');
+      },
+      // For each request
+      xhr: {
+        before: function() { console.log('xhr.before'); },
+        start: function() { console.log('xhr.start'); },
+        progress: function() { console.log('xhr.progress'); },
+        success: function() { console.log('xhr.success'); },
+        complete: function() { console.log('xhr.complete'); },
+        error: function(response) {
+          console.log('xhr.error');
+          response.error && $('<span />').css({
+            color: "red"
+          }).text(' Error: ' + response.message).insertAfter(example2);
+        }
+      }
+    });
+  });
+  </script>
 </body>
 </html>
