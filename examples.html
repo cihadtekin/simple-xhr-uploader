@@ -26,7 +26,7 @@
   <p><a href="https://github.com/cihadtekin/simple-xhr-uploader" target="_blank">Source on Github</a></p>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script type="text/javascript" src="dist/simple-xhr-uploader.min.js"></script>
+  <script type="text/javascript" src="src/simple-xhr-uploader.js"></script>
 
   <script type="text/javascript">
   $(function() {
@@ -47,11 +47,10 @@
       },
       // Listeners
       start: function() {
-        this.el.next('span').remove();
+        this.el.nextAll('span').remove();
         example2 = $('<span />').insertAfter(this.el);
       },
       progress: function(loaded, total) {
-        console.log(Math.round(loaded * 100 / total));
         example2.text(' ' + Math.round(loaded * 100 / total) + '%');
       },
       complete: function() {
@@ -59,16 +58,28 @@
       },
       // For each request
       xhr: {
-        before: function() { console.log('xhr.before'); },
-        start: function() { console.log('xhr.start'); },
-        progress: function() { console.log('xhr.progress'); },
-        success: function() { console.log('xhr.success'); },
-        complete: function() { console.log('xhr.complete'); },
+        before: function() {
+          console.log('xhr.before'); 
+        },
+        start: function() {
+          console.log('xhr.start');
+        },
+        progress: function() {
+          console.log('xhr.progress');
+        },
+        success: function() {
+          console.log('xhr.success');
+        },
+        complete: function() {
+          console.log('xhr.complete');
+        },
         error: function(response) {
           console.log('xhr.error');
-          response.error && $('<span />').css({
-            color: "red"
-          }).text(' Error: ' + response.message).insertAfter(example2);
+          response.error &&
+            $('<span />')
+              .css('color', "red")
+              .text(' Error: ' + response.message)
+              .insertAfter(example2);
         }
       }
     });

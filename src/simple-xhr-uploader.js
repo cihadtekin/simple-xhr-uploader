@@ -203,6 +203,7 @@
         self.trigger('xhr.complete', args);
         // Continue with next file
         if ( self.files[++self.queue] ) {
+          self.loaded += file.size;
           self.send();
         // Finished
         } else {
@@ -220,11 +221,10 @@
     // Progress
     xhr.upload.addEventListener('progress', function(ev) {
       // Size fix
-      var loaded = ev.loaded * file.size / ev.total;
-      // Overall loaded size
-      self.loaded += loaded;
+      var loaded = Math.round(ev.loaded * file.size / ev.total);
+
       self.trigger('xhr.progress', [loaded, file.size, self.queue, file, xhr, ev]);
-      self.trigger('progress', [self.loaded, self.total, self.queue, file, xhr, ev]);
+      self.trigger('progress', [self.loaded + loaded, self.total, self.queue, file, xhr, ev]);
     }, false);
     xhr.open('POST', self.url);
     // Set xhr header
