@@ -15,7 +15,7 @@
     "url": "https://github.com/cihadtekin/simple-xhr-uploader"
   },
   "dependencies": {
-    "jquery": "1.*"
+    "jquery": "1.9"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
