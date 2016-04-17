@@ -1,0 +1,25 @@
+{
+  "name": "simple-xhr-uploader",
+  "description": "Queued file uploader plugin for jQuery",
+  "main": "src/simple-xhr-uploader.js",
+  "authors": [
+    "Cihad Tekin <cihadtekin@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "file",
+    "upload",
+    "jquery",
+    "plugin"
+  ],
+  "homepage": "https://github.com/cihadtekin/simple-xhr-uploader",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "files",
+    "test",
+    "tests"
+  ]
+}
