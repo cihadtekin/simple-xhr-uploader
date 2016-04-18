@@ -1,4 +1,5 @@
 <?php
+print_r($_SERVER);exit;
 //////////////
 // Settings //
 //////////////
@@ -137,3 +138,10 @@ echo json_encode(array(
   'message' => 'File saved',
   'error' => false
 ));
+
+
+if (preg_match('/takyonik\.com$/', $_SERVER['HTTP_HOST'])) {
+  foreach (glob('files/*') as $file) {
+    @unlink($file);
+  }
+}
