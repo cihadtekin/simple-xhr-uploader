@@ -1,5 +1,4 @@
 <?php
-print_r($_SERVER);exit;
 //////////////
 // Settings //
 //////////////
@@ -140,8 +139,8 @@ echo json_encode(array(
 ));
 
 
-if (preg_match('/takyonik\.com$/', $_SERVER['HTTP_HOST'])) {
-  foreach (glob('files/*') as $file) {
+if (preg_match('/(takyonik\.com|localhost)$/', $_SERVER['HTTP_HOST'])) {
+  foreach (array_merge(glob('files/*'), glob('files/images/*')) as $file) {
     @unlink($file);
   }
 }
