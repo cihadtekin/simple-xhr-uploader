@@ -57,7 +57,7 @@ $errors = array(
   UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
   UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
   UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload. PHP does not '.
-                           'provide a way to ascertain which extension caused the '.
+                           'provide a way to as certain which extension caused the '.
                            'file upload to stop. Examining the list of loaded '.
                            'extensions with phpinfo() may help.'
 );
