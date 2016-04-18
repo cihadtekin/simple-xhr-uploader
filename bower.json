@@ -7,9 +7,10 @@
   ],
   "license": "MIT",
   "keywords": [
+    "jquery",
+    "multiple",
     "file",
     "upload",
-    "jquery",
     "plugin"
   ],
   "homepage": "https://github.com/cihadtekin/simple-xhr-uploader",
