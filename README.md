@@ -66,7 +66,7 @@ $("#browse").uploader({
 			<td>Accepted file types</td>
 		</tr>
 		<tr>
-			<td>defaulProgressBar</td>
+			<td>defaultProgressBar</td>
 			<td>Boolean</td>
 			<td>true</td>
 			<td>Initialize the default progress bar</td>
