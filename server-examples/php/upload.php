@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 /**
  * Main directory for uploaded files
  */
-define('UPLOAD_FOLDER', '../../files');
+define('UPLOAD_FOLDER', 'upload');
 /**
  * File input's name
  */

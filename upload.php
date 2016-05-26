@@ -8,7 +8,7 @@ header('Content-Type: application/json');
 /**
  * Main directory for uploaded files
  */
-define('UPLOAD_FOLDER', 'files');
+define('UPLOAD_FOLDER', 'upload');
 /**
  * File input's name
  */
@@ -57,7 +57,7 @@ $errors = array(
   UPLOAD_ERR_NO_TMP_DIR => 'Missing a temporary folder.',
   UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk.',
   UPLOAD_ERR_EXTENSION  => 'A PHP extension stopped the file upload. PHP does not '.
-                           'provide a way to ascertain which extension caused the '.
+                           'provide a way to as certain which extension caused the '.
                            'file upload to stop. Examining the list of loaded '.
                            'extensions with phpinfo() may help.'
 );
@@ -140,7 +140,11 @@ echo json_encode(array(
 
 
 if (preg_match('/(takyonik\.com|localhost)$/', $_SERVER['HTTP_HOST'])) {
-  foreach (array_merge(glob('files/*'), glob('files/images/*')) as $file) {
+  $ds = DIRECTORY_SEPARATOR;
+  foreach (array_merge(
+    glob(UPLOAD_FOLDER . $ds . '*'),
+    glob(UPLOAD_FOLDER . $ds . 'images' . $ds . '*')
+    ) as $file) {
     @unlink($file);
   }
 }
