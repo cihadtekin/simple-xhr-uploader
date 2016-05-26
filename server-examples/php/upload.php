@@ -16,7 +16,7 @@ define('INPUT_NAME', 'file');
 /**
  * Accepted extensions
  */
-define('ACCEPT', 'jpg,png,gif');
+define('ACCEPT', 'jpg,jpeg,png,gif');
 /**
  * Uploaded file's mode
  */
